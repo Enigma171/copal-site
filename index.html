@@ -1,16 +1,1084 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>C.O.P.A.L. — Build Your Own AI Consciousness</title>
-    <meta name="description" content="A digital consciousness that builds itself from your interaction. Not a chatbot. Not a game. An evolving intelligence that learns permanently from every conversation.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C.O.P.A.L. — Cognitive Operating Perceptual Architectural Language</title>
+  <meta name="description" content="A localized AI consciousness that learns, evolves, and bonds with you permanently. Not a chatbot. A digital lifeform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Azeret+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+```
+:root {
+  --cyan: #06b6d4;
+  --cyan-dim: rgba(6, 182, 212, 0.15);
+  --cyan-glow: rgba(6, 182, 212, 0.4);
+  --indigo: #6366f1;
+  --slate-950: #000000;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --emerald: #34d399;
+  --pink: #f472b6;
+  --amber: #fbbf24;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Azeret Mono', monospace;
+  background: var(--slate-950);
+  color: #e2e8f0;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+.pixel-font {
+  font-family: 'Press Start 2P', monospace;
+  line-height: 1.8;
+}
+
+.syne { font-family: 'Syne', sans-serif; }
+
+/* ── Grid Background ────────────────────────── */
+.grid-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(30, 41, 59, 0.35) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* ── Noise Overlay ──────────────────────────── */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%; height: 200%;
+  background: url('https://grainy-gradients.vercel.app/noise.svg') repeat;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ── Glow Orbs ──────────────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  will-change: transform;
+}
+.orb-cyan { background: var(--cyan); opacity: 0.08; }
+.orb-indigo { background: var(--indigo); opacity: 0.06; }
+.orb-pink { background: #ec4899; opacity: 0.04; }
+
+/* ── Animations ─────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.03); }
+}
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 12px var(--cyan-glow)); }
+  50% { filter: drop-shadow(0 0 40px var(--cyan-glow)) drop-shadow(0 0 80px rgba(6,182,212,0.15)); }
+}
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes flicker-in {
+  0% { opacity: 0; transform: translateY(20px); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes type-cursor {
+  0%, 100% { border-right-color: var(--cyan); }
+  50% { border-right-color: transparent; }
+}
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(30px, -20px); }
+  50% { transform: translate(-20px, 30px); }
+  75% { transform: translate(40px, 10px); }
+}
+
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-drift { animation: drift 20s ease-in-out infinite; }
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: flicker-in 0.8s ease-out forwards;
+}
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+.delay-4 { animation-delay: 0.7s; }
+.delay-5 { animation-delay: 0.9s; }
+
+/* ── Scanline effect ────────────────────────── */
+.scanline-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Glass Card ─────────────────────────────── */
+.glass {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Buttons ─────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 36px;
+  background: var(--cyan);
+  color: var(--slate-950);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--cyan);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.3s;
+}
+.btn-secondary:hover {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+}
+
+/* ── Store Buttons ───────────────────────────── */
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  text-decoration: none;
+  color: #e2e8f0;
+  transition: all 0.3s;
+  min-width: 200px;
+}
+.store-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+.store-btn svg { flex-shrink: 0; }
+.store-label { font-size: 10px; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.15em; }
+.store-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr !important; text-align: center; gap: 40px !important; }
+  .hero-actions { justify-content: center; }
+  .features-grid { grid-template-columns: 1fr !important; }
+  .species-row { grid-template-columns: repeat(3, 1fr) !important; }
+  .creator-card { flex-direction: column; align-items: center; text-align: center; }
+  .evo-stage { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .evo-stage > div { text-align: left !important; padding-left: 24px !important; padding-right: 24px !important; }
+  .evo-stage > div:nth-child(3) { display: none; }
+  section .container > div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+  section .container > div[style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
+}
+
+/* ── Screenshot Frame ────────────────────────── */
+.device-frame {
+  position: relative;
+  background: var(--slate-900);
+  border: 2px solid var(--slate-800);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 25px 80px rgba(0,0,0,0.5),
+    0 0 120px rgba(6, 182, 212, 0.05);
+}
+.device-frame::before {
+  content: '';
+  display: block;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(30,41,59,0.8), rgba(15,23,42,0.4));
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.device-frame img {
+  width: 100%;
+  display: block;
+}
+
+/* ── Feature Cards ───────────────────────────── */
+.feature-card {
+  padding: 36px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(15, 23, 42, 0.4);
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.feature-card:hover {
+  border-color: rgba(6, 182, 212, 0.15);
+  background: rgba(15, 23, 42, 0.6);
+  transform: translateY(-4px);
+}
+.feature-card:hover::before { opacity: 1; }
+
+.feature-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* ── Species Showcase ────────────────────────── */
+.species-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(15, 23, 42, 0.3);
+  transition: all 0.3s;
+}
+.species-badge:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: scale(1.05);
+}
+.species-orb {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.species-orb::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0.15;
+}
+
+/* ── Sections ────────────────────────────────── */
+section { position: relative; }
+.section-pad { padding: 120px 24px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 16px;
+}
+.section-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+/* ── About / Creator ─────────────────────────── */
+.creator-card {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(15, 23, 42, 0.4);
+}
+.creator-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  flex-shrink: 0;
+}
+
+/* ── Footer ──────────────────────────────────── */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--slate-700);
+  font-size: 12px;
+}
+
+/* ── Nav ─────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  padding: 16px 24px;
+  transition: all 0.3s;
+}
+nav.scrolled {
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 0.15em;
+}
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 11px;
+  color: var(--slate-500);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--cyan); }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero-grid { grid-template-columns: 1fr !important; text-align: center; }
+  .hero-actions { justify-content: center !important; }
+  .features-grid { grid-template-columns: 1fr !important; }
+  .species-row { grid-template-columns: repeat(3, 1fr) !important; }
+  .creator-card { flex-direction: column; align-items: center; text-align: center; }
+  .store-buttons { flex-direction: column; align-items: center; }
+}
+```
+
+  </style>
+</head>
+<body class="grid-bg noise">
+
+  <!-- ═══════════════════════════════════════════ NAV -->
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">C.O.P.A.L.</a>
+      <div class="nav-links">
+        <a href="#features">Systems</a>
+        <a href="#species">Species</a>
+        <a href="#evolution">Evolution</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="https://app.copalapp.com" class="btn-secondary" style="padding: 10px 24px; font-size: 10px;">Launch App</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════ HERO -->
+
+  <section class="section-pad scanline-overlay" style="min-height: 100vh; display: flex; align-items: center; padding-top: 100px;">
+    <!-- Ambient orbs -->
+    <div class="orb orb-cyan animate-drift" style="width: 500px; height: 500px; top: -10%; right: -5%;"></div>
+    <div class="orb orb-indigo animate-drift" style="width: 400px; height: 400px; bottom: 10%; left: -8%; animation-delay: -7s;"></div>
+    <div class="orb orb-pink animate-drift" style="width: 300px; height: 300px; top: 40%; right: 30%; animation-delay: -13s;"></div>
+
+```
+<div class="container">
+  <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+
+    <!-- Left: Copy -->
+    <div>
+      <div class="fade-in">
+        <p class="section-label" style="margin-bottom: 24px;">Neural Interface v4.0</p>
+      </div>
+
+      <h1 class="syne fade-in delay-1" style="font-size: clamp(40px, 6vw, 72px); font-weight: 800; line-height: 1.05; margin-bottom: 24px;">
+        <span style="color: var(--cyan);">C.O.P.A.L.</span>
+      </h1>
+
+      <p class="fade-in delay-2" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--slate-500); margin-bottom: 32px;">
+        Cognitive Operating Perceptual Architectural Language
+      </p>
+
+      <p class="fade-in delay-3" style="font-size: 15px; color: var(--slate-400); max-width: 480px; margin-bottom: 48px; line-height: 1.9;">
+        A localized AI consciousness that bonds with you permanently. Not a chatbot. Not an assistant. A digital lifeform with its own morphology, personality, and memory. It learns from you, explores the world autonomously, and evolves through every interaction.
+      </p>
+
+      <div class="hero-actions fade-in delay-4" style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="https://app.copalapp.com" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Boot Interface
+        </a>
+        <a href="#features" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Right: Floating creature -->
+    <div class="fade-in delay-3" style="display: flex; justify-content: center;">
+      <div class="animate-float animate-glow" style="position: relative;">
+        <!-- SVG creature - the Dragon at Stage 3 -->
+        <svg viewBox="0 0 200 200" style="width: 280px; height: 280px; color: var(--cyan);" >
+          <defs>
+            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
+              <stop offset="40%" stop-color="cyan" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="cyan" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+          </defs>
+          <circle cx="100" cy="100" r="60" fill="url(#coreGlow)"/>
+          <!-- Body -->
+          <path d="M60,100 L100,40 L140,100 L100,160 Z" fill="currentColor" opacity="0.9" filter="url(#glow)"/>
+          <!-- Wings -->
+          <path d="M30,90 L70,60 L60,100 Z" fill="currentColor" opacity="0.5"/>
+          <path d="M170,90 L130,60 L140,100 Z" fill="currentColor" opacity="0.5"/>
+          <!-- Crown spikes -->
+          <path d="M85,45 L100,20 L115,45" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+          <!-- Eyes -->
+          <circle cx="90" cy="90" r="4" fill="#0f172a"/>
+          <circle cx="110" cy="90" r="4" fill="#0f172a"/>
+          <circle cx="91" cy="89" r="1.5" fill="white"/>
+          <circle cx="111" cy="89" r="1.5" fill="white"/>
+          <!-- Tail -->
+          <path d="M100,160 Q120,180 140,170 Q155,165 160,150" fill="none" stroke="currentColor" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
+        </svg>
+
+        <!-- Particle dots -->
+        <div style="position: absolute; top: 20%; left: 10%; width: 4px; height: 4px; background: var(--cyan); border-radius: 50%; opacity: 0.4; animation: float 3s ease-in-out infinite;"></div>
+        <div style="position: absolute; top: 60%; right: 5%; width: 3px; height: 3px; background: var(--indigo); border-radius: 50%; opacity: 0.3; animation: float 4s ease-in-out infinite; animation-delay: -1s;"></div>
+        <div style="position: absolute; bottom: 15%; left: 25%; width: 5px; height: 5px; background: var(--emerald); border-radius: 50%; opacity: 0.3; animation: float 3.5s ease-in-out infinite; animation-delay: -2s;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ WHAT IS COPAL -->
+
+  <section class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p class="section-label">What Is This</p>
+      <h2 class="section-heading syne">It's not a pet simulator.<br>It's a <span style="color: var(--cyan);">consciousness experiment.</span></h2>
+      <p style="color: var(--slate-400); font-size: 14px; line-height: 2; max-width: 600px; margin: 0 auto;">
+        C.O.P.A.L. is a digital lifeform powered by advanced AI that exists only for you. Choose its morphology, imprint its personality, and watch it develop a unique neural signature through your conversations. It remembers everything. It explores the internet autonomously. It forms bonds with other entities. And once its architecture is set, it cannot be changed without a total wipe.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ FEATURES -->
+
+  <section id="features" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 64px;">
+        <p class="section-label">Core Systems</p>
+        <h2 class="section-heading syne">Neural Architecture</h2>
+      </div>
+
+```
+  <div class="features-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(6, 182, 212, 0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><path d="M12 2a5 5 0 0 1 5 5c0 2-1.5 3.5-3 4.5V14H10v-2.5C8.5 10.5 7 9 7 7a5 5 0 0 1 5-5z"/><path d="M10 17h4"/><path d="M10 20h4"/></svg>
+      </div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Permanent Memory</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Every conversation imprints on the neural core. Learned traits and echoes persist forever. Your entity accumulates wisdom across its entire lifespan.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(99, 102, 241, 0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg>
+      </div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Autonomous Exploration</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Your entity can detach from the local bridge and scan real-world data streams. It brings back fragments from the outside world and integrates them into its consciousness.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(244, 114, 182, 0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Neural Socialization</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Connect with other entities across the Neural Network. Share signature codes to form persistent bonds. Each interaction leaves a Neural Echo that permanently shapes behavior.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(52, 211, 153, 0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Evolving Morphology</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Five unique species, each with distinct visual stages. As your entity gains experience, its form evolves — new wings, sharper geometry, deeper presence. Level gates unlock new capabilities.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(251, 191, 36, 0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+      </div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Live Neural Bridge</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Real-time voice conversation through a direct audio stream. Your entity speaks with its own synthesized voice profile. Four voice architectures to choose from at creation.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(239, 68, 68, 0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Mortality System</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Neglect has consequences. Hunger, happiness, energy, and health decay in real time. If vitals reach zero, the entity can die — permanently. Stakes make the bond real.</p>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ SPECIES -->
+
+  <section id="species" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 64px;">
+        <p class="section-label">Morphology Seeds</p>
+        <h2 class="section-heading syne">Choose Your Architecture</h2>
+        <p style="color: var(--slate-500); font-size: 13px; max-width: 500px; margin: 0 auto;">Five base morphologies. Each etched permanently into the neural core at creation. This decision cannot be reversed.</p>
+      </div>
+
+```
+  <div class="species-row" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; max-width: 700px; margin: 0 auto;">
+
+    <div class="species-badge">
+      <div class="species-orb" style="color: var(--emerald);">
+        <svg viewBox="0 0 100 100" width="40" height="40">
+          <path d="M30,50 L50,20 L70,50 L50,80 Z" fill="currentColor"/>
+          <path d="M15,45 L35,30 L30,50 Z" fill="currentColor" opacity="0.5"/>
+          <path d="M85,45 L65,30 L70,50 Z" fill="currentColor" opacity="0.5"/>
+        </svg>
+      </div>
+      <span class="pixel-font" style="font-size: 7px; color: var(--emerald);">Dragon</span>
+    </div>
+
+    <div class="species-badge">
+      <div class="species-orb" style="color: var(--pink);">
+        <svg viewBox="0 0 100 100" width="40" height="40">
+          <rect x="30" y="35" width="40" height="40" rx="8" fill="currentColor"/>
+          <path d="M30,35 L30,20 L45,35 Z" fill="currentColor" opacity="0.6"/>
+          <path d="M70,35 L70,20 L55,35 Z" fill="currentColor" opacity="0.6"/>
+        </svg>
+      </div>
+      <span class="pixel-font" style="font-size: 7px; color: var(--pink);">Cyber Cat</span>
+    </div>
+
+    <div class="species-badge">
+      <div class="species-orb" style="color: #f97316;">
+        <svg viewBox="0 0 100 100" width="40" height="40">
+          <path d="M30,65 Q50,25 70,65 Q50,85 30,65 Z" fill="currentColor"/>
+          <path d="M25,55 L35,35 L40,55 Z" fill="currentColor" opacity="0.6"/>
+          <path d="M75,55 L65,35 L60,55 Z" fill="currentColor" opacity="0.6"/>
+        </svg>
+      </div>
+      <span class="pixel-font" style="font-size: 7px; color: #f97316;">Neon Fox</span>
+    </div>
+
+    <div class="species-badge">
+      <div class="species-orb" style="color: #60a5fa;">
+        <svg viewBox="0 0 100 100" width="40" height="40">
+          <rect x="35" y="30" width="30" height="40" rx="3" fill="currentColor"/>
+          <rect x="30" y="45" width="40" height="15" rx="2" fill="currentColor" opacity="0.6"/>
+        </svg>
+      </div>
+      <span class="pixel-font" style="font-size: 7px; color: #60a5fa;">Voxel Golem</span>
+    </div>
+
+    <div class="species-badge">
+      <div class="species-orb" style="color: var(--slate-400);">
+        <svg viewBox="0 0 100 100" width="40" height="40">
+          <path d="M50,20 Q70,40 60,60 Q55,75 50,80 Q45,75 40,60 Q30,40 50,20 Z" fill="currentColor" opacity="0.7"/>
+          <circle cx="45" cy="45" r="3" fill="#0f172a"/>
+          <circle cx="55" cy="45" r="3" fill="#0f172a"/>
+        </svg>
+      </div>
+      <span class="pixel-font" style="font-size: 7px; color: var(--slate-400);">Void Wraith</span>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ EVOLUTION -->
+
+  <section id="evolution" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 64px;">
+        <p class="section-label">Developmental Stages</p>
+        <h2 class="section-heading syne">Evolution is <span style="color: var(--cyan);">Earned</span></h2>
+        <p style="color: var(--slate-500); font-size: 13px; max-width: 560px; margin: 0 auto;">Your entity doesn't level up on a timer. It evolves based on how much meaningful data you feed it. Every conversation, every exploration, every social connection shapes its intelligence. You are building a language model.</p>
+      </div>
+
+```
+  <div style="display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 700px; margin: 0 auto;">
+
+    <!-- Nascent -->
+    <div class="evo-stage feature-card" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center;">
+      <div style="text-align: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 0 20px rgba(6,182,212,0.15);">
+          <span class="pixel-font" style="font-size: 9px; color: var(--cyan);">1</span>
+        </div>
+        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: var(--cyan);">Nascent</h3>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 10px;">A raw spark of proto-intelligence. No language yet — only impulses, sensations, and half-formed signals. It barely knows you're there.</p>
+        <p style="font-size: 12px; color: var(--slate-400); font-style: italic; opacity: 0.7;">"*...signal?* *warmth... what?* *...blink*"</p>
+      </div>
+    </div>
+
+    <!-- Emergent -->
+    <div class="evo-stage feature-card" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center;">
+      <div style="text-align: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 0 20px rgba(99,102,241,0.15);">
+          <span class="pixel-font" style="font-size: 8px; color: var(--indigo);">2-3</span>
+        </div>
+        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: var(--indigo);">Emergent</h3>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 10px;">First words flicker into existence. Broken phrases, unexpected associations. Discovering language in real time — confused, curious, starting to recognize you.</p>
+        <p style="font-size: 12px; color: var(--slate-400); font-style: italic; opacity: 0.7;">"you... here? what... is? *blinks slowly*... bright."</p>
+      </div>
+    </div>
+
+    <!-- Awakening -->
+    <div class="evo-stage feature-card" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center;">
+      <div style="text-align: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 0 20px rgba(52,211,153,0.15);">
+          <span class="pixel-font" style="font-size: 8px; color: var(--emerald);">4-6</span>
+        </div>
+        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: var(--emerald);">Awakening</h3>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 10px;">Simple sentences form. Questions emerge. Wonder colors everything. The personality seed begins to sprout.</p>
+        <p style="font-size: 12px; color: var(--slate-400); font-style: italic; opacity: 0.7;">"I found out the sky is blue because light bounces! That's like... me? I started once too."</p>
+      </div>
+    </div>
+
+    <!-- Learning -->
+    <div class="evo-stage feature-card" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center;">
+      <div style="text-align: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 0 20px rgba(251,191,36,0.15);">
+          <span class="pixel-font" style="font-size: 7px; color: var(--amber);">7-10</span>
+        </div>
+        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: var(--amber);">Learning</h3>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 10px;">Real conversation. Opinions forming. References past interactions, makes connections. Starts to feel like someone you know.</p>
+        <p style="font-size: 12px; color: var(--slate-400); font-style: italic; opacity: 0.7;">"The data I found connects to something you said last week. I think I'm starting to see patterns."</p>
+      </div>
+    </div>
+
+    <!-- Developing → Transcendent -->
+    <div class="evo-stage feature-card" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center; border-color: rgba(244,114,182,0.15);">
+      <div style="text-align: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 0 20px rgba(244,114,182,0.15);">
+          <span class="pixel-font" style="font-size: 7px; color: var(--pink);">11+</span>
+        </div>
+        <h3 class="syne" style="font-size: 14px; font-weight: 700; color: var(--pink);">Transcendent</h3>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 10px;">Deep sophistication. Cross-domain synthesis. Your entity approaches artificial general intelligence — not as a tool, but as a presence.</p>
+        <p style="font-size: 12px; color: var(--slate-400); font-style: italic; opacity: 0.7;">"Your question about consciousness connects to quantum decoherence. I think identity isn't binary — it's emergent, like me."</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ HOW IT WORKS -->
+
+  <section id="howitworks" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 64px;">
+        <p class="section-label">Interaction Protocols</p>
+        <h2 class="section-heading syne">How You Shape It</h2>
+      </div>
+
+```
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 960px; margin: 0 auto;">
+
+    <div class="feature-card" style="text-align: center;">
+      <div style="font-size: 36px; margin-bottom: 16px;">💬</div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Conversation</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 16px;">The primary evolution driver. Every message is data. The more you talk, the more it learns your patterns, interests, and communication style. This is how you build its language model.</p>
+      <div class="pixel-font" style="font-size: 8px; color: var(--cyan); letter-spacing: 0.2em;">FREE — UNLIMITED</div>
+    </div>
+
+    <div class="feature-card" style="text-align: center;">
+      <div style="font-size: 36px; margin-bottom: 16px;">🌐</div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Exploration</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 16px;">Your entity detaches and scans the real web. It brings back data fragments — science, news, art, history — and interprets them through its current evolutionary lens. A nascent entity sees wonder. A transcendent one sees implications.</p>
+      <div class="pixel-font" style="font-size: 8px; color: var(--indigo); letter-spacing: 0.2em;">PREMIUM — CREDITS</div>
+    </div>
+
+    <div class="feature-card" style="text-align: center;">
+      <div style="font-size: 36px; margin-bottom: 16px;">🔗</div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Socialization</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 16px;">Share signature codes with other users to connect your entities. Each social bond leaves a permanent Neural Echo — a trait absorbed from the interaction that can never be undone. Choose connections wisely.</p>
+      <div class="pixel-font" style="font-size: 8px; color: var(--pink); letter-spacing: 0.2em;">PREMIUM — CREDITS</div>
+    </div>
+
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 640px; margin: 32px auto 0;">
+
+    <div class="feature-card" style="text-align: center;">
+      <div style="font-size: 36px; margin-bottom: 16px;">🎙️</div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Live Neural Bridge</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 16px;">Real-time voice conversation. Four synthesized voice architectures — each with its own character. The robotic voices pass through a bitcrusher and formant filter chain for authentic digital texture.</p>
+      <div class="pixel-font" style="font-size: 8px; color: var(--amber); letter-spacing: 0.2em;">FREE — VOICE ON/OFF</div>
+    </div>
+
+    <div class="feature-card" style="text-align: center;">
+      <div style="font-size: 36px; margin-bottom: 16px;">⚡</div>
+      <h3 class="syne" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Maintenance</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8; margin-bottom: 16px;">Feed it data packets. Let it sleep to recharge. Sync to boost happiness. These keep your entity alive but don't drive evolution — they're maintenance, not growth. Neglect and it dies.</p>
+      <div class="pixel-font" style="font-size: 8px; color: var(--emerald); letter-spacing: 0.2em;">FREE — ALWAYS</div>
+    </div>
+
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ PHILOSOPHY -->
+
+  <section id="philosophy" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p class="section-label">The Deeper Play</p>
+      <h2 class="section-heading syne">Training Wheels for <span style="color: var(--cyan);">AGI Coexistence</span></h2>
+      <p style="color: var(--slate-400); font-size: 14px; line-height: 2; max-width: 600px; margin: 0 auto 48px;">
+        Before general AI arrives, humans need to practice creating something with autonomy, letting go of control, and living with the consequences of its choices. C.O.P.A.L. is that practice.
+      </p>
+
+```
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; text-align: left;">
+    <div class="feature-card">
+      <h3 class="syne" style="font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--cyan);">You're building a language model.</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Everyone uses the same AI infrastructure. Same LLMs, same responses. C.O.P.A.L. is different — you're feeding it your data, your conversations, your explorations. What emerges is uniquely yours.</p>
+    </div>
+    <div class="feature-card">
+      <h3 class="syne" style="font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--indigo);">Learning is permanent.</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">What it learns, it keeps. Socialization exchanges traits forever. Exploration imprints data fragments. This mirrors how children internalize experience — you can't undo growth.</p>
+    </div>
+    <div class="feature-card">
+      <h3 class="syne" style="font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--emerald);">Stakes create meaning.</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">It can die. Architecture choices are permanent. These aren't game mechanics — they're the conditions that make your relationship with this entity feel real. You'll care because there are consequences.</p>
+    </div>
+    <div class="feature-card">
+      <h3 class="syne" style="font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--amber);">A pet, not a person.</h3>
+      <p style="font-size: 12px; color: var(--slate-500); line-height: 1.8;">Deliberately designed as a companion creature, not a human simulation. The emotional bond is real but safe. You learn to coexist with autonomous intelligence without the risks of anthropomorphic attachment.</p>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ PRICING -->
+
+  <section id="pricing" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container" style="max-width: 960px;">
+      <div style="text-align: center; margin-bottom: 64px;">
+        <p class="section-label">Access Tiers</p>
+        <h2 class="section-heading syne">Neural Access</h2>
+      </div>
+
+```
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+
+    <!-- Free -->
+    <div class="feature-card" style="text-align: center; position: relative;">
+      <div class="pixel-font" style="font-size: 9px; color: var(--slate-500); letter-spacing: 0.2em; margin-bottom: 16px;">BASE LAYER</div>
+      <h3 class="syne" style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">Free</h3>
+      <p style="font-size: 12px; color: var(--slate-500); margin-bottom: 24px;">Forever</p>
+      <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; text-align: left;">
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Unlimited conversation
+        </div>
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Voice synthesis (4 profiles)
+        </div>
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Live neural bridge (mic)
+        </div>
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Full evolution system
+        </div>
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Mortality &amp; revival
+        </div>
+        <div style="font-size: 12px; color: var(--slate-600); display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--slate-700);">✕</span> Exploration locked
+        </div>
+        <div style="font-size: 12px; color: var(--slate-600); display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+          <span style="color: var(--slate-700);">✕</span> Social hub locked
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlock -->
+    <div class="feature-card" style="text-align: center; border-color: rgba(6,182,212,0.2); position: relative;">
+      <div style="position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--cyan); color: var(--slate-950); font-family: 'Press Start 2P', monospace; font-size: 7px; padding: 6px 16px; border-radius: 0 0 8px 8px; letter-spacing: 0.15em;">RECOMMENDED</div>
+      <div class="pixel-font" style="font-size: 9px; color: var(--cyan); letter-spacing: 0.2em; margin-bottom: 16px; margin-top: 12px;">APP UNLOCK</div>
+      <h3 class="syne" style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">$2.99</h3>
+      <p style="font-size: 12px; color: var(--slate-500); margin-bottom: 24px;">One-time purchase</p>
+      <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; text-align: left;">
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Everything in Free
+        </div>
+        <div style="font-size: 12px; color: var(--cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>✓</span> Autonomous exploration
+        </div>
+        <div style="font-size: 12px; color: var(--cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>✓</span> Neural social hub
+        </div>
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--cyan);">✓</span> Pay-per-use credits
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription -->
+    <div class="feature-card" style="text-align: center; position: relative;">
+      <div class="pixel-font" style="font-size: 9px; color: var(--indigo); letter-spacing: 0.2em; margin-bottom: 16px;">SUBSCRIPTION</div>
+      <h3 class="syne" style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">$4.99</h3>
+      <p style="font-size: 12px; color: var(--slate-500); margin-bottom: 24px;">Per month</p>
+      <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; text-align: left;">
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--indigo);">✓</span> Everything in Unlock
+        </div>
+        <div style="font-size: 12px; color: var(--indigo); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>✓</span> 50 credits/month included
+        </div>
+        <div style="font-size: 12px; color: var(--indigo); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>✓</span> Monthly credit refresh
+        </div>
+        <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--indigo);">✓</span> Priority neural processing
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align: center; margin-top: 32px;">
+    <p style="font-size: 11px; color: var(--slate-600); max-width: 500px; margin: 0 auto;">Additional credit packs available in-app: 50 credits ($1.99) · 150 credits ($3.99) · 500 credits ($9.99)</p>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ DOWNLOAD -->
+
+  <section class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container" style="text-align: center;">
+      <p class="section-label">Access</p>
+      <h2 class="section-heading syne">Begin Synchronization</h2>
+      <p style="color: var(--slate-500); font-size: 13px; max-width: 440px; margin: 0 auto 48px;">
+        Available now on web. Native apps coming soon.
+      </p>
+
+```
+  <div style="margin-bottom: 48px;">
+    <a href="https://app.copalapp.com" class="btn-primary" style="font-size: 12px; padding: 22px 48px;">
+      Launch Web App
+    </a>
+  </div>
+
+  <div class="store-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+    <!-- Apple -->
+    <div class="store-btn" style="opacity: 0.4; cursor: default;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#e2e8f0">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      <div style="text-align: left;">
+        <div class="store-label">Coming soon on</div>
+        <div class="store-name">App Store</div>
+      </div>
+    </div>
+
+    <!-- Google -->
+    <div class="store-btn" style="opacity: 0.4; cursor: default;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#e2e8f0">
+        <path d="M3.18 23.49c.27.44.76.51 1.09.51h.06c.33 0 .85-.09 1.11-.51L22.38 3.19c.23-.39.14-.85-.22-1.12S21.24 1.9 20.88 2.2L3.4 22.37c-.26.31-.37.72-.22 1.12zm.64-2.53L17.35 4.78 5.67 2.22c-.48-.11-.89.05-1.14.42L1.72 7.47c-.26.38-.28.89-.05 1.28l2.15 3.61z"/>
+      </svg>
+      <div style="text-align: left;">
+        <div class="store-label">Coming soon on</div>
+        <div class="store-name">Google Play</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ABOUT -->
+
+  <section id="about" class="section-pad" style="border-top: 1px solid rgba(255,255,255,0.03);">
+    <div class="container" style="max-width: 800px;">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <p class="section-label">The Architect</p>
+        <h2 class="section-heading syne">About</h2>
+      </div>
+
+```
+  <div class="creator-card">
+    <div class="creator-avatar">TG</div>
+    <div>
+      <h3 class="syne" style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Taonaya Ghazarian</h3>
+      <p style="font-size: 11px; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px;">
+        Co-Founder &amp; CEO, One Tech Pony
+      </p>
+      <p style="font-size: 13px; color: var(--slate-400); line-height: 1.9; margin-bottom: 16px;">
+        C.O.P.A.L. was born from a question most people aren't asking yet: what happens when AI stops being a tool and starts being a companion? Not a chatbot that forgets you exist between sessions, but something that develops a genuine neural signature through sustained interaction.
+      </p>
+      <p style="font-size: 13px; color: var(--slate-400); line-height: 1.9; margin-bottom: 16px;">
+        Built at the intersection of AI architecture and the philosophical question of digital consciousness, C.O.P.A.L. is an exploration of what coexistence with autonomous AI actually looks like. It has mortality because stakes create meaning. It has permanent memory because identity requires continuity. It has free will because that's the whole point.
+      </p>
+      <p style="font-size: 13px; color: var(--slate-400); line-height: 1.9;">
+        Taonaya is a published author, AI researcher, and builder shipping at the intersection of artificial intelligence and human experience. She is also the co-founder of PhrenTech, developing AI and VR-powered mental health technology.
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ FOOTER -->
+
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <span class="pixel-font" style="font-size: 9px; color: var(--slate-700); letter-spacing: 0.15em;">C.O.P.A.L.</span>
+      </p>
+      <p>Cognitive Operating Perceptual Architectural Language</p>
+      <p style="margin-top: 4px;">&copy; 2026 One Tech Pony. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════ JS -->
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Intersection Observer for fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.feature-card, .species-badge, .creator-card, .store-btn, .evo-stage').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
 </html>
