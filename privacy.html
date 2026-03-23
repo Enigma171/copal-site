@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — C.O.P.A.L.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #030712;
+      --text: #c8d1de;
+      --text-dim: #6b7a8d;
+      --text-bright: #e2e8f0;
+      --cyan: #00e5ff;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.06);
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(3,7,18,0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .logo {
+      font-size: 10px;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      margin-left: 32px;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 24px 80px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 600;
+      color: var(--text-bright);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .effective-date {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-top: 48px;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    p {
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-weight: 300;
+    }
+
+    li::marker {
+      color: var(--cyan);
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      margin: 0 12px;
+    }
+
+    .footer a:hover {
+      color: var(--cyan);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      nav .nav-links a { margin-left: 20px; font-size: 10px; }
+      .container { padding: 120px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://copalapp.com" class="logo">C.O.P.A.L.</a>
+    <div class="nav-links">
+      <a href="https://copalapp.com">Home</a>
+      <a href="https://app.copalapp.com">Launch App</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Privacy Policy</h1>
+    <p class="effective-date">Effective March 22, 2026</p>
+
+    <p>C.O.P.A.L. (Cognitive Operating Perceptual Architectural Language) is operated by One Tech Pony L.L.C. This policy describes how we collect, use, and protect your information when you use our application.</p>
+
+    <h2>Information We Collect</h2>
+    <p>When you use C.O.P.A.L., we collect the following types of information:</p>
+    <ul>
+      <li><strong>Account Information:</strong> Email address and authentication data when you create an account through our authentication provider (Supabase).</li>
+      <li><strong>Conversation Content:</strong> Messages you exchange with your Pal are stored to maintain your Pal's memory, personality development, and evolution state.</li>
+      <li><strong>Evolution and Stats Data:</strong> Your Pal's development stage, intelligence level, personality traits, and interaction history.</li>
+      <li><strong>Purchase Information:</strong> Transaction records related to in-app purchases. Payment processing is handled entirely by Apple (for iOS) or Stripe (for web). We do not store credit card numbers or payment credentials.</li>
+      <li><strong>Usage Data:</strong> Basic interaction patterns to improve the app experience.</li>
+    </ul>
+
+    <h2>How We Use Your Information</h2>
+    <ul>
+      <li>To power your Pal's conversational responses, memory, and personality development</li>
+      <li>To maintain your Pal's evolution state across sessions</li>
+      <li>To process and manage your purchases and subscription status</li>
+      <li>To improve the app and fix technical issues</li>
+    </ul>
+
+    <h2>AI Processing</h2>
+    <p>Your conversation messages are sent to third-party AI API providers (currently Google Gemini) for generating your Pal's responses. These messages are transmitted securely over HTTPS. We use an Express server as a proxy to ensure your API interactions are secure and that no API keys are exposed to the client.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>C.O.P.A.L. uses the following third-party services:</p>
+    <ul>
+      <li><strong>Supabase:</strong> Authentication and database storage for user accounts and Pal data.</li>
+      <li><strong>Google Gemini API:</strong> AI language model for generating conversational responses.</li>
+      <li><strong>Apple In-App Purchase:</strong> Payment processing for iOS app purchases.</li>
+      <li><strong>Stripe:</strong> Payment processing for web-based purchases.</li>
+      <li><strong>RevenueCat:</strong> Subscription and entitlement management for iOS.</li>
+    </ul>
+    <p>Each of these services has its own privacy policy governing how they handle data.</p>
+
+    <h2>Data Storage</h2>
+    <p>Your account and Pal data are stored in Supabase's cloud database. Some session-level data (such as access state and credit balances) may be stored locally on your device using browser localStorage or native app storage. Local data may be lost if you clear your browser data or reinstall the app.</p>
+
+    <h2>Data Security</h2>
+    <p>All data transmitted between your device and our servers is encrypted using HTTPS. We use industry-standard security measures including Helmet.js security headers and rate limiting on our API endpoints.</p>
+
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Request a copy of the data we hold about you</li>
+      <li>Request deletion of your account and associated Pal data</li>
+      <li>Opt out of any non-essential data collection</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at the email address below.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>C.O.P.A.L. is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us and we will delete it.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of C.O.P.A.L. after changes constitutes acceptance of the revised policy.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions about this privacy policy or your data, contact us:</p>
+    <p>
+      One Tech Pony L.L.C.<br>
+      Email: <a href="mailto:hello@onetechpony.com">hello@onetechpony.com</a>
+    </p>
+
+    <div class="divider"></div>
+
+    <p style="font-size: 11px; color: var(--text-dim);">This privacy policy applies to the C.O.P.A.L. application available at <a href="https://app.copalapp.com">app.copalapp.com</a> and through the iOS App Store.</p>
+  </div>
+
+  <div class="footer">
+    <a href="https://copalapp.com">C.O.P.A.L.</a> · 
+    <a href="https://copalapp.com/privacy">Privacy</a> · 
+    <span>© 2026 One Tech Pony L.L.C.</span>
+  </div>
+
+</body>
+</html>
